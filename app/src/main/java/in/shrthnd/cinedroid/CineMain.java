@@ -66,8 +66,7 @@ public class CineMain extends Activity
 	private boolean recordCounter;
 	private FileOutputStream pstos;
 	private boolean hasPst;
-	private HtmlAd htmlAd;
-	
+
 	
 	private class TIMECODE
 	{
@@ -699,13 +698,6 @@ public class CineMain extends Activity
 				pst.kelvin = kel_i;
 				pst.focus = fcs_i;
 			}
-		
-			
-		//Entry AD Section
-		AndroidSDKProvider.initSDK(this);
-		AdPreferences adPreferences =
-			new AdPreferences("104735826", "204655453", AdPreferences.TYPE_INAPP_EXIT);
-		htmlAd = new HtmlAd(this); htmlAd.load(adPreferences, null);
 	}
 	
 	protected void onStop()
@@ -1229,12 +1221,6 @@ public class CineMain extends Activity
 					}
 					else
 					{
-						if(htmlAd != null) 
-						{
-							htmlAd.show();
-							Toast.makeText(myContext, "Exiting...", Toast.LENGTH_SHORT).show();
-							super.onBackPressed();
-						}
 						return false;
 					}
 				}
@@ -1274,7 +1260,7 @@ public class CineMain extends Activity
 				cam.focus();
 				switch(touch.getAction())
 				{
-					case touch.ACTION_UP:
+					case MotionEvent.ACTION_UP:
 					{	
 						//Hold For Focus
 						if(!rackAreas.isEmpty())
@@ -1331,7 +1317,7 @@ public class CineMain extends Activity
 			cam.setExpArea(r);
 			switch (touch.getAction())
 			{
-				case touch.ACTION_UP:
+				case MotionEvent.ACTION_UP:
 					msg.cancel();
 					msg = Toast.makeText(myContext, "Exposure Area Set", Toast.LENGTH_SHORT);
 					msg.show();
